@@ -54,10 +54,11 @@ const Hero = () => {
     
     // Mouse move interaction
     const mouse = new THREE.Vector2();
-    window.addEventListener('mousemove', (event) => {
+    const handleMouseMove = (event) => {
       mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
       mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
-    });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
     
     // Animation loop
     const clock = new THREE.Clock();
@@ -76,8 +77,9 @@ const Hero = () => {
           const wave = Math.sin(elapsedTime * line.userData.frequency + idx * 0.1 + line.userData.offset) * line.userData.amplitude;
           
           // Add mouse interaction
+          // Fixed the syntax error in the ternary operator here
           const mouseEffect = mouse.length() > 0 ? 
-            (1 - Math.min(1, originalPos.distanceTo(new THREE.Vector3(mouse.x * 10, mouse.y * 10, 0)) / 10) * 3 : 0;
+            (1 - Math.min(1, originalPos.distanceTo(new THREE.Vector3(mouse.x * 10, mouse.y * 10, 0)) / 10)) * 3 : 0;
           
           positions[i] = originalPos.x + wave * 0.3 + mouse.x * mouseEffect;
           positions[i + 1] = originalPos.y + wave * 0.5 + mouse.y * mouseEffect;
@@ -103,6 +105,7 @@ const Hero = () => {
     
     return () => {
       window.removeEventListener('resize', handleResize);
+      window.removeEventListener('mousemove', handleMouseMove);
       renderer.dispose();
     };
   }, []);
