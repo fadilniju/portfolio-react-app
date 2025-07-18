@@ -4,9 +4,8 @@ import type { Config } from "tailwindcss";
 const config: Config = {
   darkMode: ["class"],
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}", // Corrected paths for Vite
   ],
   theme: {
     extend: {
@@ -26,7 +25,7 @@ const config: Config = {
         'green-tint': 'rgba(100,255,218,0.1)',
         'pink': '#f57dff',
         'blue': '#57cbff',
-        // ShadCN UI Colors (kept from your original file)
+        // ShadCN UI Colors
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
